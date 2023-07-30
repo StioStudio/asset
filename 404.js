@@ -1,10 +1,16 @@
 function addFile(_path){
     let rem = document.createElement("div")
-    let a = document.createElement("a")
-    a.href = _path.path
-    a.innerText = _path.path
+    rem.classList.add("file")
+    let b = document.createElement("a")
+    b.href = "/" + _path.path
+    b.innerText = _path.path
+    let a = document.createElement("div")
+    a.innerText = _path.type
     rem.append(a)
+    rem.append(b)
     rem.append(document.createElement("br"))
+    rem.style.marginLeft = (_path.path.split("/").length -1) * 50 + "px"
+    rem.style.marginBottom = "10px"
     document.querySelector(".files").append(rem)
 }
 let rem = await(await fetch("https://api.github.com/repos/stiostudio/assets/git/trees/main?recursive=1")).json()
