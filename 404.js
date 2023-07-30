@@ -1,8 +1,8 @@
 function addFile(_path){
     let rem = document.createElement("div")
     let a = document.createElement("a")
-    a.href = _path
-    a.innerText = _path
+    a.href = _path.path
+    a.innerText = _path.path
     rem.append(a)
     rem.append(document.createElement("br"))
     document.querySelector(".files").append(rem)
@@ -11,7 +11,7 @@ let rem = await(await fetch("https://api.github.com/repos/stiostudio/assets/git/
 if (rem.truncated != undefined) {
     console.log(rem)
     for (let i = 0; i < rem.tree.length; i++) {
-        addFile(rem.tree[i].path)
+        addFile(rem.tree[i])
     }
 }
 else {
