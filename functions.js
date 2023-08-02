@@ -68,7 +68,7 @@ function create_projectBox(_projectHeader, _projects) {
     for (let i = 0; i < _projects.length; i++) {
         rem = addInArray(rem, createProject(_projects[i]), (rem.indexOf('</div helper="over HERE">')))
     }
-    console.log(rem)
+    // console.log(rem)
     return rem
 }
 function addInArray(_array, _element, _InsertPosition) {
