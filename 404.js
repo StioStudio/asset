@@ -3,7 +3,7 @@ function addFile(_path){
     rem.classList.add("file")
     let b = document.createElement("a")
     b.href = "/" + _path.path
-    b.innerText = _path.path
+    b.innerText = _path.path.split("/")[_path.path.split("/").length - 1]
     let a = document.createElement("div")
     a.innerText = _path.type
     rem.append(a)
@@ -15,7 +15,6 @@ function addFile(_path){
 }
 let rem = await(await fetch("https://api.github.com/repos/stiostudio/assets/git/trees/main?recursive=1")).json()
 if (rem.truncated != undefined) {
-    console.log(rem)
     for (let i = 0; i < rem.tree.length; i++) {
         addFile(rem.tree[i])
     }
