@@ -81,5 +81,25 @@
                 "_link": "https://scratch.mit.edu/projects/826059152/"
             }
         ]
+    ],
+    [
+        {
+            "_projectBoxHeader": "YouTube Videos",
+            "_InsertPosition": "afterBegin"
+        },
+        [
+            {
+                "_projectHeader": "Overwatch 2: best Sigma ranked game",
+                "_projectContentImageLink": "https://i.ytimg.com/an_webp/zYuqk5x3e7I/mqdefault_6s.webp?du=3000&sqp=CI7iraYG&rs=AOn4CLAr32a7lQ3W2j4jN7qdxfiSUMiamw",
+                "_projectContentImageLinkAlt": "YouTube Tumbnail",
+                "_link": "https://youtu.be/zYuqk5x3e7I"
+            },
+            {
+                "_projectHeader": "Nature: Norway (part 10)",
+                "_projectContentImageLink": "https://i.ytimg.com/vi/_YtD8_Iz7ok/oar2.jpg?sqp=-oaymwEhCJUDENAFSFryq4qpAxMIARUAAAAAJQAAyEI9AICiQ3gB&rs=AOn4CLAbgtzYq7uFfsKz-KZpaK_rGUjUNA",
+                "_projectContentImageLinkAlt": "YouTube Tumbnail",
+                "_link": "https://www.youtube.com/shorts/_YtD8_Iz7ok"
+            }
+        ]
     ]
 ]
