@@ -10,25 +10,29 @@
                 "_projectHeader": "Main Page",
                 "_projectContentImageLink": "https://assets.stio.studio/logo/stio/transparent/1600x1600.gif",
                 "_projectContentImageLinkAlt": "stio's pfp",
-                "_link": "https://stio.studio/"
+                "_link": "https://stio.studio/",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "404",
                 "_projectContentImageLink": "https://assets.stio.studio/logo/stio/404/1600x1600.png",
                 "_projectContentImageLinkAlt": "stio's 404 png",
-                "_link": "https://stio.studio/404"
+                "_link": "https://stio.studio/404",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "Assets",
                 "_projectContentImageLink": "https://assets.stio.studio/logo/stio/404/1600x1600.gif",
                 "_projectContentImageLinkAlt": "stio's 404 gif",
-                "_link": "https://assets.stio.studio/"
+                "_link": "https://assets.stio.studio/",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "Chat",
                 "_projectContentImageLink": "https://stio.studio/chat/chat-icon.png",
                 "_projectContentImageLinkAlt": "chat icon",
-                "_link": "https://stio.studio/chat"
+                "_link": "https://stio.studio/chat",
+                "_projectType": "A"
             }
         ]
     ],
@@ -42,43 +46,50 @@
                 "_projectHeader": "Pumpkin Peril",
                 "_projectContentImageLink": "https://cdn2.scratch.mit.edu/get_image/project/435114033_480x360.png",
                 "_projectContentImageLinkAlt": "project thumbnail",
-                "_link": "https://scratch.mit.edu/projects/435114033"
+                "_link": "https://scratch.mit.edu/projects/435114033",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "ScratchOS 3.0",
                 "_projectContentImageLink": "https://cdn2.scratch.mit.edu/get_image/project/676069770_480x360.png",
                 "_projectContentImageLinkAlt": "project thumbnail",
-                "_link": "https://scratch.mit.edu/projects/676069770/"
+                "_link": "https://scratch.mit.edu/projects/676069770/",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "Verlet ball pool!!!",
                 "_projectContentImageLink": "https://cdn2.scratch.mit.edu/get_image/project/864356486_144x108.png",
                 "_projectContentImageLinkAlt": "project thumbnail",
-                "_link": "https://scratch.mit.edu/projects/864356486/"
+                "_link": "https://scratch.mit.edu/projects/864356486/",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "Scratch 4.0 Concept",
                 "_projectContentImageLink": "https://cdn2.scratch.mit.edu/get_image/project/827943393_480x360.png",
                 "_projectContentImageLinkAlt": "project thumbnail",
-                "_link": "https://scratch.mit.edu/projects/827943393"
+                "_link": "https://scratch.mit.edu/projects/827943393",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "TuneShare",
                 "_projectContentImageLink": "https://cdn2.scratch.mit.edu/get_image/project/863714854_144x108.png",
                 "_projectContentImageLinkAlt": "project thumbnail",
-                "_link": "https://scratch.mit.edu/projects/863714854/"
+                "_link": "https://scratch.mit.edu/projects/863714854/",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "3D Minecraft v3.0",
                 "_projectContentImageLink": "https://cdn2.scratch.mit.edu/get_image/project/791961589_144x108.png",
                 "_projectContentImageLinkAlt": "project thumbnail",
-                "_link": "https://scratch.mit.edu/projects/791961589/"
+                "_link": "https://scratch.mit.edu/projects/791961589/",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "Cat Adventures",
                 "_projectContentImageLink": "https://cdn2.scratch.mit.edu/get_image/project/826059152_144x108.png",
                 "_projectContentImageLinkAlt": "project thumbnail",
-                "_link": "https://scratch.mit.edu/projects/826059152/"
+                "_link": "https://scratch.mit.edu/projects/826059152/",
+                "_projectType": "A"
             }
         ]
     ],
@@ -90,15 +101,17 @@
         [
             {
                 "_projectHeader": "Overwatch 2: best Sigma ranked game",
-                "_projectContentImageLink": "https://i.ytimg.com/an_webp/zYuqk5x3e7I/mqdefault_6s.webp?du=3000&sqp=CI7iraYG&rs=AOn4CLAr32a7lQ3W2j4jN7qdxfiSUMiamw",
+                "_projectContentImageLink": "https://i9.ytimg.com/vi/zYuqk5x3e7I/mqdefault.jpg?v=645be9d7&sqp=COyQsKYG&rs=AOn4CLCCiKbbiqdNkHY4xYuywvHPrhMXFQ",
                 "_projectContentImageLinkAlt": "YouTube Tumbnail",
-                "_link": "https://youtu.be/zYuqk5x3e7I"
+                "_link": "https://youtu.be/zYuqk5x3e7I",
+                "_projectType": "A"
             },
             {
                 "_projectHeader": "Nature: Norway (part 10)",
                 "_projectContentImageLink": "https://i.ytimg.com/vi/_YtD8_Iz7ok/oar2.jpg?sqp=-oaymwEhCJUDENAFSFryq4qpAxMIARUAAAAAJQAAyEI9AICiQ3gB&rs=AOn4CLAbgtzYq7uFfsKz-KZpaK_rGUjUNA",
                 "_projectContentImageLinkAlt": "YouTube Tumbnail",
-                "_link": "https://www.youtube.com/shorts/_YtD8_Iz7ok"
+                "_link": "https://www.youtube.com/shorts/_YtD8_Iz7ok",
+                "_projectType": "B"
             }
         ]
     ]

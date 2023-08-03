@@ -21,9 +21,18 @@ function addProjectBox(_InsertPosition, _projectHeader, _projects) {
     document.querySelector(".content").insertAdjacentHTML(_InsertPosition, create_projectBox(_projectHeader, _projects))
 }
 function createProject(_projects) {
-    let rem = `<a class="text-decoration-none" href="${_projects._link}">
+    let fontSize = 20
+    if (_projects._projectHeader.length > 14 && _projects._projectType == "A") {
+        fontSize = 15
+    }
+    if (_projects._projectHeader.length > 20 && _projects._projectType == "A") {
+        fontSize = 9
+    }
+    let rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
     <div class="project overflow-hidden">
-        <div class="project-header centerText overflow-overlay">
+        <div class="project-header centerText overflow-overlay" style="font-size: ${
+            fontSize
+        }px">
             ${_projects._projectHeader}
         </div>
         <div class="project-content display-flex">
