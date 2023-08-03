@@ -23,7 +23,7 @@ function addProjectBox(_InsertPosition, _projectHeader, _projects) {
 function createProject(_projects) {
     let rem = `<a class="text-decoration-none" href="${_projects._link}">
     <div class="project overflow-hidden">
-        <div class="project-header centerText">
+        <div class="project-header centerText overflow-overlay">
             ${_projects._projectHeader}
         </div>
         <div class="project-content display-flex">
@@ -38,7 +38,7 @@ let projectCountId = 0
 function create_projectBox(_projectHeader, _projects) {
     projectCountId++
 
-    let rem = `<div class="bigBox projectBox box-shadow">
+    let rem = `<div class="bigBox projectBox box-shadow overflow-hidden">
     <div class="bigBox-header centerText">
         <h3 class="noMargin">${_projectHeader}</h3>
     </div>
