@@ -21,7 +21,7 @@ function addProjectBox(_InsertPosition, _projectHeader, _projects) {
     document.querySelector(".content").insertAdjacentHTML(_InsertPosition, create_projectBox(_projectHeader, _projects))
 }
 function createProject(_projects) {
-    let fontSize = 20
+    let fontSize = 17
     if (_projects._projectHeader.length > 14 && _projects._projectType == "A") {
         fontSize = 15
     }
