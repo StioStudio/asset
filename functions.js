@@ -28,6 +28,18 @@ function createProject(_projects) {
     if (_projects._projectHeader.length > 20 && _projects._projectType == "A") {
         fontSize = 9
     }
+    if (_projects._projectType == "C") {
+        fontSize = 50
+    }
+    if (_projects._projectHeader.length > 5 && _projects._projectType == "C") {
+        fontSize = 35
+    }
+    if (_projects._projectHeader.length > 13 && _projects._projectType == "C") {
+        fontSize = 20
+    }
+    if (_projects._projectHeader.length > 35 && _projects._projectType == "C") {
+        fontSize = 15
+    }
     let rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
     <div class="project overflow-hidden">
         <div class="project-header centerText overflow-overlay" style="font-size: ${
