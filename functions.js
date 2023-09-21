@@ -40,7 +40,7 @@ function createProject(_projects) {
     if (_projects._projectHeader.length > 10 && _projects._projectType == "C") {
         fontSize = 25
     }
-    if (_projects._projectHeader.length > 35 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 15 && _projects._projectType == "C") {
         fontSize = 15
     }
     let rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
