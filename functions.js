@@ -1,13 +1,26 @@
-let createProjectInfo = {
-    github(_api) {
-        return _api
-    },
-    scratch(_api) {
-        
-    },
-    youtube(_api) {
-        
+function idGoTo(_id) {
+    let rem = document.querySelector(_id)
+    setActive(document.querySelector(`${_id} .bigBox-header a`))
+    rem.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+}
+function contentCreate(_info) {
+    for (let i = _info.length - 1; i > -1; i--) {
+        addProjectBox(_info[i][0]._InsertPosition, _info[i][0]._projectBoxHeader, _info[i][0]._id, _info[i][1])
     }
+    idGoTo(document.location.hash)
+    document.querySelectorAll(".bigBox-header a").forEach((_element)=>{
+        _element.addEventListener("click", ()=>{
+            setActive(_element)
+        })
+    })
+}
+let active = undefined
+function setActive(_element) {
+    if (active != undefined) {
+        active.classList.remove("active")
+    }
+    active = _element
+    _element.classList.add("active")    
 }
 function StringToHTML(_string) {
     return new DOMParser().parseFromString(_string, "text/html");
@@ -17,8 +30,8 @@ function roughScale(x, base) {
     if (isNaN(parsed)) { return 0; }
     return parsed;
 }
-function addProjectBox(_InsertPosition, _projectHeader, _projects) {
-    document.querySelector(".content").insertAdjacentHTML(_InsertPosition, create_projectBox(_projectHeader, _projects))
+function addProjectBox(_InsertPosition, _projectHeader, _id, _projects) {
+    document.querySelector(".content").insertAdjacentHTML(_InsertPosition, create_projectBox(_projectHeader, _projects, _id))
 }
 function createProject(_projects) {
     let fontSize = 17
@@ -59,12 +72,12 @@ function createProject(_projects) {
 }
 /** Gives you a sting */
 let projectCountId = 0
-function create_projectBox(_projectHeader, _projects) {
+function create_projectBox(_projectHeader, _projects, _id) {
     projectCountId++
-
-    let rem = `<div class="bigBox projectBox box-shadow overflow-hidden">
+    let rem = `<div id="${_id}" class="bigBox projectBox box-shadow overflow-hidden">
     <div class="bigBox-header centerText">
         <h3 class="noMargin">${_projectHeader}</h3>
+        <a class="anchorjs-link" href="#${_id}"></a>
     </div>
     <div class="bigBox-content display-flex width100per">
         <button class="projectButton projectButton-left" onclick="
