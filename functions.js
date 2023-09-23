@@ -7,7 +7,10 @@ function contentCreate(_info) {
     for (let i = _info.length - 1; i > -1; i--) {
         addProjectBox(_info[i][0]._InsertPosition, _info[i][0]._projectBoxHeader, _info[i][0]._id, _info[i][1])
     }
-    idGoTo(document.location.hash)
+    console.log(document.location.hash)
+    if (document.location.hash != "") {
+        idGoTo(document.location.hash)
+    }
     document.querySelectorAll(".bigBox-header a").forEach((_element)=>{
         _element.addEventListener("click", ()=>{
             setActive(_element)
