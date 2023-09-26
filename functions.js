@@ -66,7 +66,7 @@ function createProject(_projects) {
             ${_projects._projectHeader}
         </div>
         <div class="project-content display-flex">
-            <img src="${_projects._projectContentImageLink}" alt="${_projects._projectContentImageLinkAlt}">
+            ${_projects._projectContentImageLink == undefined || `<img src="${_projects._projectContentImageLink}" alt="${_projects._projectContentImageLinkAlt}">`}
         </div>                    
     </div>
 </a>`
