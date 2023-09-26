@@ -53,7 +53,7 @@ function createProject(_projects) {
         fontSize = 30
     }
     if (_projects._projectHeader.length > 10 && _projects._projectType == "C") {
-        fontSize = 25
+        fontSize = 20
     }
     if (_projects._projectHeader.length > 15 && _projects._projectType == "C") {
         fontSize = 15
