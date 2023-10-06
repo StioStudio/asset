@@ -1,3 +1,6 @@
+function StringToDoc(_string) {
+    return new DOMParser().parseFromString(`_string`, "text/html")
+}
 function idGoTo(_id) {
     let rem = document.querySelector(_id)
     setActive(document.querySelector(`${_id} .bigBox-header a`))
@@ -10,8 +13,8 @@ function contentCreate(_info) {
     if (document.location.hash != "") {
         idGoTo(document.location.hash)
     }
-    document.querySelectorAll(".bigBox-header a").forEach((_element)=>{
-        _element.addEventListener("click", ()=>{
+    document.querySelectorAll(".bigBox-header a").forEach((_element) => {
+        _element.addEventListener("click", () => {
             setActive(_element)
         })
     })
@@ -22,7 +25,7 @@ function setActive(_element) {
         active.classList.remove("active")
     }
     active = _element
-    _element.classList.add("active")    
+    _element.classList.add("active")
 }
 function StringToHTML(_string) {
     return new DOMParser().parseFromString(_string, "text/html");
@@ -60,8 +63,7 @@ function createProject(_projects) {
     }
     let rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
     <div class="project overflow-hidden">
-        <div class="project-header centerText overflow-overlay" style="font-size: ${
-            fontSize
+        <div class="project-header centerText overflow-overlay" style="font-size: ${fontSize
         }px">
             ${_projects._projectHeader}
         </div>
@@ -111,5 +113,9 @@ function create_projectBox(_projectHeader, _projects, _id) {
     return rem
 }
 function addInArray(_array, _element, _InsertPosition) {
-    return("".concat(_array.slice(0, _InsertPosition), _element, _array.slice(_InsertPosition, _array.length)))
+    return ("".concat(_array.slice(0, _InsertPosition), _element, _array.slice(_InsertPosition, _array.length)))
+}
+
+function Notification() {
+
 }
