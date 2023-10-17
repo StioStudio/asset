@@ -1,3 +1,10 @@
+/**
+ * Use the url you are on now to show the files
+ * So https://asset.stio.studio/logo/stio/ would show 404, transperent and white
+ * Making this to a file system
+ * Or the path will open to the link.
+ * And lets you click on a link symbol on the side of the path that makes the url to that path.
+ */
 function addFile(_path){
     let rem = document.createElement("div")
     rem.classList.add("file")
