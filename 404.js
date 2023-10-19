@@ -5,6 +5,16 @@
  * Or the path will open to the link.
  * And lets you click on a link symbol on the side of the path that makes the url to that path.
  */
+function jsonToFileSystem(_json) {
+    let rem = _json.tree
+    
+    let file = []
+    rem.forEach(e => {
+        file.push(e.path.split("/"))
+    });
+    
+    console.log(file)
+}
 function addFile(_path){
     let rem = document.createElement("div")
     rem.classList.add("file")
@@ -21,6 +31,7 @@ function addFile(_path){
     document.querySelector(".files").append(rem)
 }
 let rem = await(await fetch("https://api.github.com/repos/stiostudio/assets/git/trees/main?recursive=1")).json()
+jsonToFileSystem(rem)
 if (rem.truncated != undefined) {
     for (let i = 0; i < rem.tree.length; i++) {
         addFile(rem.tree[i])

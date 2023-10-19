@@ -1,3 +1,25 @@
+let i18n = {
+    async setLanguage(_lang = "en") {
+        this.language = _lang;
+        i18n.languageMsg = await (await fetch(`./${this.language}/messages.json`)).json()
+    },
+    getMessage(_msg, _get = "message") {
+        let rem = ""
+        try {
+            rem = this.languageMsg[_msg][_get]
+        } catch (error) {
+            rem = ""
+        }
+        return (rem)
+    },
+    getPreferedLanguage() {
+        return (document.documentElement.lang)
+    },
+    language: "en",
+    languageMsg: {},
+}
+i18n.language = i18n.getPreferedLanguage()
+
 function StringToDoc(_string) {
     return new DOMParser().parseFromString(`_string`, "text/html")
 }
