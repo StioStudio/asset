@@ -100,25 +100,25 @@ function addProjectBox(_InsertPosition, _projectHeader, _id, _projects) {
 }
 function createProject(_projects) {
     let fontSize = 17
-    if (_projects._projectHeader.length > 25 && _projects._projectType == "A") {
+    if (_projects._projectHeader.length > 14+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "A") {
         fontSize = 15
     }
-    if (_projects._projectHeader.length > 31 && _projects._projectType == "A") {
+    if (_projects._projectHeader.length > 20+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "A") {
         fontSize = 9
     }
     if (_projects._projectType == "C") {
         fontSize = 50
     }
-    if (_projects._projectHeader.length > 16 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 5+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 35
     }
-    if (_projects._projectHeader.length > 18 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 7+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 30
     }
-    if (_projects._projectHeader.length > 21 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 10+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 20
     }
-    if (_projects._projectHeader.length > 26 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 15+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 15
     }
     let rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
