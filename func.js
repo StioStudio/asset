@@ -18,7 +18,7 @@ let cookie = {
 let i18n = {
     async setLanguage(_lang = "en") {
         this.language = _lang;
-        i18n.languageMsg = await (await fetch(`./_locales/${this.language}/messages.json`)).json()
+        this.languageMsg = await (await fetch(`./_locales/${this.language}/messages.json`)).json()
     },
     getMessage(_msg, _get = "message") {
         let rem = ""
