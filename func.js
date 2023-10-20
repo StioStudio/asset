@@ -1,7 +1,24 @@
+let cookie = {
+    get(_key, _cookie = document.cookie) {
+        let rem = _cookie
+        rem = rem.slice(document.cookie.indexOf(`${_key}=`)+_key.length+1, document.cookie.length)
+        // console.log(rem)
+        if(rem.includes(";")) {
+            return document.cookie.slice(document.cookie.indexOf(`${_key}=`)+_key.length+1, rem.indexOf(";")+document.cookie.length-rem.length)
+        }
+        else {
+            return document.cookie.slice(document.cookie.indexOf(`${_key}=`)+_key.length+1, document.cookie.length)
+        }    
+    },
+    set(_key, _value) {
+        // console.log(`${_key}=${_value};domain=${window.location.hostname}`)
+        document.cookie = `${_key}=${_value};domain=${window.location.hostname}`
+    }
+}
 let i18n = {
     async setLanguage(_lang = "en") {
         this.language = _lang;
-        i18n.languageMsg = await (await fetch(`./${this.language}/messages.json`)).json()
+        i18n.languageMsg = await (await fetch(`./_locales/${this.language}/messages.json`)).json()
     },
     getMessage(_msg, _get = "message") {
         let rem = ""
@@ -15,11 +32,32 @@ let i18n = {
     getPreferedLanguage() {
         return (document.documentElement.lang)
     },
+    tranlated: 0,
+    tranlatePage(_doc) {
+        document.querySelectorAll("tra").forEach(e => {
+            // console.log(e.cloneNode(true));
+            e.style.display = "content";
+            if(this.tranlated == 0) {
+                e.setAttributeNS("tra", "tra", `${e.innerHTML}`)
+                // console.log(e)
+                e.innerHTML = this.getMessage(e.innerHTML)
+            }
+            else {
+                // console.log(e)
+                e.innerHTML = this.getMessage(e.getAttribute("tra"))
+            }
+        });
+        this.tranlated++
+    },
     language: "en",
     languageMsg: {},
 }
 i18n.language = i18n.getPreferedLanguage()
 
+async function translationSetup() {
+    await i18n.setLanguage(cookie.get("language"))
+    i18n.tranlatePage()
+}
 function StringToDoc(_string) {
     return new DOMParser().parseFromString(`_string`, "text/html")
 }
@@ -62,25 +100,25 @@ function addProjectBox(_InsertPosition, _projectHeader, _id, _projects) {
 }
 function createProject(_projects) {
     let fontSize = 17
-    if (_projects._projectHeader.length > 14 && _projects._projectType == "A") {
+    if (_projects._projectHeader.length > 25 && _projects._projectType == "A") {
         fontSize = 15
     }
-    if (_projects._projectHeader.length > 20 && _projects._projectType == "A") {
+    if (_projects._projectHeader.length > 31 && _projects._projectType == "A") {
         fontSize = 9
     }
     if (_projects._projectType == "C") {
         fontSize = 50
     }
-    if (_projects._projectHeader.length > 5 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 16 && _projects._projectType == "C") {
         fontSize = 35
     }
-    if (_projects._projectHeader.length > 7 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 18 && _projects._projectType == "C") {
         fontSize = 30
     }
-    if (_projects._projectHeader.length > 10 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 21 && _projects._projectType == "C") {
         fontSize = 20
     }
-    if (_projects._projectHeader.length > 15 && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 26 && _projects._projectType == "C") {
         fontSize = 15
     }
     let rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
