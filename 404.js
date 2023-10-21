@@ -30,7 +30,7 @@ function addFile(_path){
     rem.style.marginBottom = "10px"
     document.querySelector(".files").append(rem)
 }
-let rem = await(await fetch("https://api.github.com/repos/stiostudio/assets/git/trees/main?recursive=1")).json()
+let rem = await(await fetch("https://api.github.com/repos/stiostudio/asset/git/trees/main?recursive=1")).json()
 jsonToFileSystem(rem)
 if (rem.truncated != undefined) {
     for (let i = 0; i < rem.tree.length; i++) {
