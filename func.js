@@ -51,6 +51,22 @@ let i18n = {
     },
     language: "en",
     languageMsg: {},
+    getTra(_document = document) {
+        let tra = _document.querySelectorAll("tra")
+        let rem = []
+        tra.forEach(e => {
+            rem.push(e.innerHTML)
+        });
+        return rem
+    },
+    createMessagesJSON(_document = document) {
+        let tra = this.getTra(_document)
+        let rem = {}
+        tra.forEach(e => {
+            rem[e] = {message: e}
+        });
+        return rem
+    }
 }
 i18n.language = i18n.getPreferedLanguage()
 
@@ -68,7 +84,7 @@ function idGoTo(_id) {
 }
 function contentCreate(_info) {
     for (let i = _info.length - 1; i > -1; i--) {
-        addProjectBox(_info[i][0]._InsertPosition, _info[i][0]._projectBoxHeader, _info[i][0]._id, _info[i][1])
+        addProjectBox(_info[i][0]._InsertPosition, _info[i][0]._projectBoxHeader, _info[i][0]._id, _info[i][0]._class, _info[i][1])
     }
     if (document.location.hash != "") {
         idGoTo(document.location.hash)
@@ -95,8 +111,8 @@ function roughScale(x, base) {
     if (isNaN(parsed)) { return 0; }
     return parsed;
 }
-function addProjectBox(_InsertPosition, _projectHeader, _id, _projects) {
-    document.querySelector(".content").insertAdjacentHTML(_InsertPosition, create_projectBox(_projectHeader, _projects, _id))
+function addProjectBox(_InsertPosition, _projectHeader, _id, _class, _projects) {
+    document.querySelector(".content").insertAdjacentHTML(_InsertPosition, create_projectBox(_projectHeader, _projects, _id, _class))
 }
 function createProject(_projects) {
     let fontSize = 17
@@ -136,9 +152,9 @@ function createProject(_projects) {
 }
 /** Gives you a sting */
 let projectCountId = 0
-function create_projectBox(_projectHeader, _projects, _id) {
+function create_projectBox(_projectHeader, _projects, _id, _class = "") {
     projectCountId++
-    let rem = `<div id="${_id}" class="bigBox projectBox box-shadow overflow-hidden">
+    let rem = `<div id="${_id}" class="bigBox projectBox box-shadow overflow-hidden ${_class}">
     <div class="bigBox-header centerText">
         <h3 class="noMargin">${_projectHeader}</h3>
         <a class="anchorjs-link" href="#${_id}"></a>

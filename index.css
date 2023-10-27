@@ -75,10 +75,6 @@ h1 {
         background-color: var(--orange-background-color);
     }
 }
-.footer {
-    background-color: var(--footer-background-color);
-    text-align: center;
-}
 .links {
     display: contents;
 }
@@ -273,4 +269,8 @@ h1 {
 }
 .font-size-20px {
     font-size: 20px;
+}
+
+.footer, .footer .project, .footer .projectButton {
+    background-color: var(--footer-background-color);
 }
