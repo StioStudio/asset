@@ -274,3 +274,15 @@ h1 {
 .footer, .footer .project, .footer .projectButton {
     background-color: var(--footer-background-color);
 }
+
+.last-updated {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    max-width: calc(40% - 110px);
+    line-break: anywhere;
+    padding: 5px;
+    font-size: 20px;
+    background-color: var(--orange-background-color);
+    border-radius: var(--main-border-radius);
+}
