@@ -76,7 +76,10 @@ i18n.language = i18n.getPreferedLanguage()
 
 async function translationSetup(_tranlatePage = false) {
     let rem = cookie.get("language")
-    console.log(rem)
+    if(rem != "") {
+        await i18n.setLanguage(rem)
+        i18n.tranlatePage()
+    }
 }
 function StringToDoc(_string) {
     return new DOMParser().parseFromString(`_string`, "text/html")
