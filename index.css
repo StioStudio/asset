@@ -291,7 +291,7 @@ h1 {
 .marging-10per {
     margin-top: 10%;
 }
-.language-options {
+.options {
     background-color: var(--orange-background-color);
     border: none;
     border-radius: 10px;

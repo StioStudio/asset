@@ -10,6 +10,9 @@ let cookie = {
             return document.cookie.slice(document.cookie.indexOf(`${_key}=`)+_key.length+1, document.cookie.length)
         }    
     },
+    raw() {
+        return (document.cookie)
+    },
     set(_key, _value) {
         // console.log(`${_key}=${_value};domain=${window.location.hostname}`)
         document.cookie = `${_key}=${_value};domain=${window.location.hostname}`
