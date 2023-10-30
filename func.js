@@ -53,6 +53,16 @@ let i18n = {
         });
         this.tranlated++
     },
+    resetTranslations() {
+        if (this.tranlated == 0) {
+            console.error("Have not been translated yet")
+        }
+        document.querySelectorAll("tra").forEach(e => {
+            // e.setAttributeNS("tra", "tra", `${e.innerHTML}`)
+            // console.log(e)
+            e.innerHTML = e.getAttribute("tra")
+        });
+    },
     language: "en",
     languageMsg: {},
     getTra(_document = document) {
@@ -63,11 +73,14 @@ let i18n = {
         });
         return rem
     },
-    createMessagesJSON(_document = document) {
+    createMessagesJSON({_oldJSON = {}, _document = document} = {}) {
         let tra = this.getTra(_document)
-        let rem = {}
+        let rem = _oldJSON
         tra.forEach(e => {
-            rem[e] = {message: e}
+            if(rem[e] == undefined) {
+                rem[e] = {message: e}
+                console.log(rem[e])
+            }
         });
         return rem
     }
