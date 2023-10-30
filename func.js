@@ -15,7 +15,8 @@ let cookie = {
     },
     set(_key, _value) {
         // console.log(`${_key}=${_value};domain=${window.location.hostname}`)
-        document.cookie = `${_key}=${_value};domain=${window.location.hostname}`
+        // document.cookie = `${_key}=${_value};domain=${window.location.hostname}`
+        document.cookie = `${_key}=${_value};domain=stio.studio`
     }
 }
 let i18n = {
