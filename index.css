@@ -37,6 +37,19 @@ h1 {
     border-radius: var(--main-border-radius);
     padding: 10px 30px;
 }
+.type-B.bigBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    font-size: 30px;
+    width: calc(var(--header-info-width) - 30);
+    background-color: var(--orange-background-color);
+    margin: var(--header-info-margin);
+    border-radius: var(--main-border-radius);
+    padding: 10px 0px 0px 10px;
+}
 .redBox {
     background-color: var(--main-red);
 }
@@ -148,7 +161,7 @@ h1 {
     position: relative;
 }
 
-.projectType-A .project {
+.type-A .projectType-A .project {
     margin: 0 10px 0 0;
     width: 160px;
     min-width: 160px;
@@ -156,22 +169,22 @@ h1 {
     background-color: var(--orange-background-color);
     border-radius: var(--main-border-radius);
 }
-.projectType-A .project-header {
+.type-A .projectType-A .project-header {
     margin: 5px 0;
     height: 20px;
 }
-.projectType-A .project-content {
+.type-A .projectType-A .project-content {
     height: 70px;
     width: 160px;
 }
-.projectType-A .project-content img {
+.type-A .projectType-A .project-content img {
     object-fit: cover;
     height: 70px;
     margin: 0 auto;
     border-radius: var(--main-border-radius);
 }
 
-.projectType-B .project {
+.type-A .projectType-B .project {
     display: flex;
     margin: 0 10px 0 0;
     height: 100%;
@@ -181,22 +194,22 @@ h1 {
     background-color: var(--orange-background-color);
     border-radius: var(--main-border-radius);
 }
-.projectType-B .project-header {
+.type-A .projectType-B .project-header {
     margin: auto 0;
 }
-.projectType-B .project-content {
+.type-A .projectType-B .project-content {
     margin: auto 0;
     height: 70px;
     width: 160px;
 }
-.projectType-B .project-content img {
+.type-A .projectType-B .project-content img {
     object-fit: cover;
     height: 70px;
     margin: 0 auto;
     border-radius: var(--main-border-radius);
 }
 
-.projectType-C .project {
+.type-A .projectType-C .project {
     margin: 0 10px 0 0;
     width: 160px;
     min-width: 160px;
@@ -204,15 +217,43 @@ h1 {
     background-color: var(--orange-background-color);
     border-radius: var(--main-border-radius);
 }
-.projectType-C .project-header {
+.type-A .projectType-C .project-header {
     margin: 5px 0;
     height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.projectType-C .project-content {
+.type-A .projectType-C .project-content {
     display: none;
+}
+
+
+.type-B .projectType-C {
+    display: block;
+    width: fit-content;
+}
+.type-B .projectType-C .project {
+    margin: 0 10px 10px 0;
+    width: 160px;
+    min-width: 160px;
+    font-size: 30px;
+    background-color: var(--orange-background-color);
+    border-radius: var(--main-border-radius);
+}
+.type-B .projectType-C .project-header {
+    margin: 5px 0;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.type-B .projectType-C .project-content {
+    display: none;
+}
+
+.grid {
+    text-align: center;
 }
 
 .bigBox-header {
@@ -247,7 +288,6 @@ h1 {
     opacity: 1;
 }
 
-
 .marging-10per {
     margin-top: 10%;
 }
@@ -270,22 +310,34 @@ h1 {
 .font-size-20px {
     font-size: 20px;
 }
+@media screen and (min-width: 600px) {
+    .last-updated {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        max-width: calc(40% - 110px);
+        line-break: anywhere;
+        padding: 5px;
+        font-size: 20px;
+        background-color: var(--orange-background-color);
+        border-radius: var(--main-border-radius);
+    }
+}
+@media screen and (max-width: 600px) {
+    .last-updated {
+        width: calc(var(--header-info-width) - 30); 
+        margin: var(--header-info-margin);       line-break: anywhere;
+        padding: 5px;
+        font-size: 20px;
+        background-color: var(--orange-background-color);
+        border-radius: var(--main-border-radius);
+    }        
+}
+
 
 .footer {
     text-align: center;
 }
-.footer, .footer .project, .footer .projectButton {
+.footer, .footer.projectBox .project, .footer .projectButton {
     background-color: var(--footer-background-color);
-}
-
-.last-updated {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    max-width: calc(40% - 110px);
-    line-break: anywhere;
-    padding: 5px;
-    font-size: 20px;
-    background-color: var(--orange-background-color);
-    border-radius: var(--main-border-radius);
 }

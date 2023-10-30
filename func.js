@@ -84,7 +84,7 @@ function idGoTo(_id) {
 }
 function contentCreate(_info) {
     for (let i = _info.length - 1; i > -1; i--) {
-        addProjectBox(_info[i][0]._InsertPosition, _info[i][0]._projectBoxHeader, _info[i][0]._id, _info[i][0]._class, _info[i][1])
+        addProjectBox(_info[i][0]._type, _info[i][0]._projectBoxHeader, _info[i][0]._id, _info[i][0]._class, _info[i][1])
     }
     if (document.location.hash != "") {
         idGoTo(document.location.hash)
@@ -111,10 +111,10 @@ function roughScale(x, base) {
     if (isNaN(parsed)) { return 0; }
     return parsed;
 }
-function addProjectBox(_InsertPosition, _projectHeader, _id, _class, _projects) {
-    document.querySelector(".content").insertAdjacentHTML(_InsertPosition, create_projectBox(_projectHeader, _projects, _id, _class))
+function addProjectBox(_type, _projectHeader, _id, _class, _projects) {
+    document.querySelector(".content").insertAdjacentHTML("afterBegin", create_projectBox(_type, _projectHeader, _projects, _id, _class))
 }
-function createProject(_projects) {
+function createProject(_type, _projects) {
     let fontSize = 17
     if (_projects._projectHeader.length > 14+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "A") {
         fontSize = 15
@@ -137,56 +137,108 @@ function createProject(_projects) {
     if (_projects._projectHeader.length > 15+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 15
     }
-    let rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
+    let rem;
+    if(_type == "A") {
+        let remB = ""
+        if(_projects._projectContentImageLink != undefined) {
+            remB = `<img src="${_projects._projectContentImageLink}" alt="${_projects._projectContentImageLinkAlt}">`
+        }
+        rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
     <div class="project overflow-hidden">
         <div class="project-header centerText overflow-overlay" style="font-size: ${fontSize
         }px">
             ${_projects._projectHeader}
         </div>
         <div class="project-content display-flex">
-            ${_projects._projectContentImageLink == undefined || `<img src="${_projects._projectContentImageLink}" alt="${_projects._projectContentImageLinkAlt}">`}
+            ${remB}
         </div>                    
     </div>
 </a>`
+    }
+    if(_type == "B") {
+        let remB = ""
+        if(_projects._projectContentImageLink != undefined) {
+            remB = `<img src="${_projects._projectContentImageLink}" alt="${_projects._projectContentImageLinkAlt}">`
+        }
+        rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
+    <div class="project overflow-hidden">
+        <div class="project-header centerText overflow-overlay" style="font-size: ${fontSize
+        }px">
+            ${_projects._projectHeader}
+        </div>
+        <div class="project-content display-flex">
+            ${remB}
+        </div>                    
+    </div>
+</a>`
+    }
     return rem;
 }
 /** Gives you a sting */
 let projectCountId = 0
-function create_projectBox(_projectHeader, _projects, _id, _class = "") {
+function create_projectBox(_type, _projectHeader, _projects, _id, _class = "") {
     projectCountId++
-    let rem = `<div id="${_id}" class="bigBox projectBox box-shadow overflow-hidden ${_class}">
-    <div class="bigBox-header centerText">
+
+    let projectHeader = ""
+    if(_projectHeader != undefined) {
+        projectHeader = `<div class="bigBox-header centerText">
         <h3 class="noMargin">${_projectHeader}</h3>
         <a class="anchorjs-link" href="#${_id}"></a>
-    </div>
-    <div class="bigBox-content display-flex width100per">
-        <button class="projectButton projectButton-left" onclick="
-            let remA = document.querySelector('.projectCountIdA${projectCountId}')
-            let leftA = roughScale(remA.style.left.slice(0, remA.style.left.length -2), 10)
-            if (leftA < 0) {
-                remA.style.left = (leftA + 170) + 'px'   
-            }
-        "></button>
-        <div class="slideBox-list overflow-hidden width100per projectCountIdB${projectCountId}">
-            <div class="slideBox-track projectCountIdA${projectCountId}">
-
-
-            </div helper="over HERE">
-        </div>
-        <button class="projectButton projectButton-right" onclick="
-            let remB = document.querySelector('.projectCountIdA${projectCountId}')
-            let leftB = roughScale(remB.style.left.slice(0, remB.style.left.length -2), 10)
-            if (leftB > ((document.querySelector('.projectCountIdA${projectCountId}').children.length * -170) + document.querySelector('.projectCountIdB${projectCountId}').getBoundingClientRect().width)) {
-                remB.style.left = (leftB - 170) + 'px'   
-            }
-        "></button>
-    </div>
-</div>`
-    for (let i = 0; i < _projects.length; i++) {
-        rem = addInArray(rem, createProject(_projects[i]), (rem.indexOf('</div helper="over HERE">')))
+    </div>`
     }
-    // console.log(rem)
-    return rem
+    if(_type == "A") {
+        let rem = `<div id="${_id}" class="type-${_type} bigBox projectBox box-shadow overflow-hidden ${_class}">
+        ${projectHeader}
+        <div class="bigBox-content display-flex width100per">
+            <button class="projectButton projectButton-left" onclick="
+                let remA = document.querySelector('.projectCountIdA${projectCountId}')
+                let leftA = roughScale(remA.style.left.slice(0, remA.style.left.length -2), 10)
+                if (leftA < 0) {
+                    remA.style.left = (leftA + 170) + 'px'   
+                }
+            "></button>
+            <div class="slideBox-list overflow-hidden width100per projectCountIdB${projectCountId}">
+                <div class="slideBox-track projectCountIdA${projectCountId}">
+
+
+                </div helper="over HERE">
+            </div>
+            <button class="projectButton projectButton-right" onclick="
+                let remB = document.querySelector('.projectCountIdA${projectCountId}')
+                let leftB = roughScale(remB.style.left.slice(0, remB.style.left.length -2), 10)
+                if (leftB > ((document.querySelector('.projectCountIdA${projectCountId}').children.length * -170) + document.querySelector('.projectCountIdB${projectCountId}').getBoundingClientRect().width)) {
+                    remB.style.left = (leftB - 170) + 'px'   
+                }
+            "></button>
+        </div>
+    </div>`
+        for (let i = 0; i < _projects.length; i++) {
+            rem = addInArray(rem, createProject(_type, _projects[i]), (rem.indexOf('</div helper="over HERE">')))
+        }
+        // console.log(rem)
+        return rem
+    }
+    if(_type == "B") {
+        let projectHeader = ""
+        if(_projectHeader != undefined) {
+            projectHeader = `<div class="bigBox-header centerText">
+            <h3 class="noMargin">${_projectHeader}</h3>
+            <a class="anchorjs-link" href="#${_id}"></a>
+        </div>`
+        }
+
+        let rem = `
+<div id="${_id}" class="type-${_type} bigBox projectBox box-shadow ${_class} projectCountIdA${projectCountId}">
+    ${projectHeader}
+
+</div helper="over HERE">`
+
+        for (let i = 0; i < _projects.length; i++) {
+            rem = addInArray(rem, createProject(_type, _projects[i]), (rem.indexOf('</div helper="over HERE">')))
+        }
+        // console.log(rem)
+        return rem
+    }
 }
 function addInArray(_array, _element, _InsertPosition) {
     return ("".concat(_array.slice(0, _InsertPosition), _element, _array.slice(_InsertPosition, _array.length)))
