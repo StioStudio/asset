@@ -20,9 +20,9 @@ let cookie = {
     }
 }
 let i18n = {
-    async setLanguage(_lang = "en") {
+    async setLanguage(_lang = "en", _localesDir = "./locales/") {
         this.language = _lang;
-        this.languageMsg = await (await fetch(`./locales/${this.language}/messages.json`)).json()
+        this.languageMsg = await (await fetch(`${_localesDir}${this.language}/messages.json`)).json()
     },
     getMessage(_msg, _get = "message") {
         let rem = ""
@@ -87,11 +87,13 @@ let i18n = {
 }
 i18n.language = i18n.getPreferedLanguage()
 
-async function translationSetup(_tranlatePage = false) {
+async function translationSetup({_tranlatePage = true, _localesDir = "./locales/"} = {}) {
     let rem = cookie.get("language")
     if(rem != "") {
-        await i18n.setLanguage(rem)
-        i18n.tranlatePage()
+        await i18n.setLanguage(rem, _localesDir)
+        if(_tranlatePage) {
+            i18n.tranlatePage()
+        }
     }
 }
 function StringToDoc(_string) {
