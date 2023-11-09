@@ -291,6 +291,9 @@ h1 {
 .marging-10per {
     margin-top: 10%;
 }
+.height-15px {
+    height: 15px;
+}
 .options {
     background-color: var(--orange-background-color);
     border: none;
