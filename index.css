@@ -258,12 +258,12 @@ h1 {
 
 .bigBox-header {
     display: flex;
-    width: 100%;
-}
-.bigBox-header {
-    display: flex;
     align-items: center;
     width: 100%;
+}
+.type-B .bigBox-header {
+    padding-left: 20px;
+    padding-right: 30px;
 }
 .bigBox-header h3 {
     margin-left: auto;
