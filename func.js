@@ -1,3 +1,17 @@
+async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io", path = window.location.pathname, autoHTML = true}) {
+    return await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}&per_page=1`)
+        .then(response => response.json())
+        .then(data => {
+            if (autoHTML) {
+                const lastCommitDate = new Date(data[0].commit.author.date).toUTCString();
+                return (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
+            }
+            else {
+                return new Date(data[0].commit.author.date).toUTCString();
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
 let cookie = {
     get(_key, _cookie = document.cookie) {
         let rem = _cookie
