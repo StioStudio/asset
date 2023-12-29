@@ -62,15 +62,15 @@ let i18n = {
         }
         return (rem)
     },
-    getPreferedLanguage() {
+    getPreferredLanguage() {
         return (document.documentElement.lang)
     },
-    tranlated: 0,
-    tranlatePage(_doc) {
+    translated: 0,
+    translatePage(_doc) {
         document.querySelectorAll("tra").forEach(e => {
             // console.log(e.cloneNode(true));
             e.style.display = "content";
-            if(this.tranlated == 0) {
+            if(this.translated == 0) {
                 e.setAttributeNS("tra", "tra", `${e.innerHTML}`)
                 // console.log(e)
                 e.innerHTML = this.getMessage(e.innerHTML)
@@ -80,10 +80,10 @@ let i18n = {
                 e.innerHTML = this.getMessage(e.getAttribute("tra"))
             }
         });
-        this.tranlated++
+        this.translated++
     },
     resetTranslations() {
-        if (this.tranlated == 0) {
+        if (this.translated == 0) {
             console.error("Have not been translated yet")
         }
         document.querySelectorAll("tra").forEach(e => {
@@ -114,14 +114,14 @@ let i18n = {
         return rem
     }
 }
-i18n.language = i18n.getPreferedLanguage()
+i18n.language = i18n.getPreferredLanguage()
 
-async function translationSetup({_tranlatePage = true, _localesDir = "./locales/"} = {}) {
+async function translationSetup({_translatePage = true, _localesDir = "./locales/"} = {}) {
     let rem = cookie.get("language")
     if(rem != "") {
         await i18n.setLanguage(rem, _localesDir)
-        if(_tranlatePage) {
-            i18n.tranlatePage()
+        if(_translatePage) {
+            i18n.translatePage()
         }
     }
 }
