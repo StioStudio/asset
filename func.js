@@ -1,5 +1,6 @@
 async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io", path = window.location.pathname, autoHTML = true, append = true}) {
-    return await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}&per_page=1`)
+    try {
+        return await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}&per_page=1`)
         .then(response => response.json())
         .then(data => {
             if(append) {
@@ -14,7 +15,17 @@ async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io",
                 return new Date(data[0].commit.author.date).toUTCString();
             }
         })
-        .catch(error => console.error('Error fetching data:', error));
+    } catch (error) {
+        if(append) {
+            document.querySelector(".last-updated").innerHTML = (`<tra>Last Updated: </tra><time datetime="ERROR getting date">ERROR getting date</time>`);
+        }
+        if (autoHTML) {
+            return (`<tra>Last Updated: </tra><time datetime="ERROR getting date">ERROR getting date</time>`);
+        }
+        else {
+            return "ERROR getting date";
+        }
+    }
 }
 let cookie = {
     get(_key, _cookie = document.cookie) {

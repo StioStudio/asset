@@ -313,26 +313,26 @@ h1 {
 .font-size-20px {
     font-size: 20px;
 }
+
+.last-updated {
+    font-size: 20px;
+    background-color: var(--orange-background-color);
+    border-radius: var(--main-border-radius);
+}
 @media screen and (min-width: 600px) {
-    .last-updated {
+    .widgit {
         position: absolute;
         right: 20px;
         top: 20px;
         max-width: calc(40% - 110px);
         padding: 5px;
-        font-size: 20px;
-        background-color: var(--orange-background-color);
-        border-radius: var(--main-border-radius);
-    }
+    }        
 }
 @media screen and (max-width: 600px) {
-    .last-updated {
+    .widgit {
         width: calc(var(--header-info-width) - 30); 
         margin: var(--header-info-margin);
         padding: 5px;
-        font-size: 20px;
-        background-color: var(--orange-background-color);
-        border-radius: var(--main-border-radius);
     }        
 }
 
