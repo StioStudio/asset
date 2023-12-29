@@ -1,7 +1,11 @@
-async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io", path = window.location.pathname, autoHTML = true}) {
+async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io", path = window.location.pathname, autoHTML = true, append = true}) {
     return await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}&per_page=1`)
         .then(response => response.json())
         .then(data => {
+            if(append) {
+                const lastCommitDate = new Date(data[0].commit.author.date).toUTCString();
+                document.querySelector(".last-updated").innerHTML = (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
+            }
             if (autoHTML) {
                 const lastCommitDate = new Date(data[0].commit.author.date).toUTCString();
                 return (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
