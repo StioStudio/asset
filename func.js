@@ -1,3 +1,11 @@
+let mainDomain = document.location.hostname
+mainDomain = mainDomain.split(".")
+if (mainDomain.length > 1) {
+    mainDomain = `${mainDomain[mainDomain.length - 2]}.${mainDomain[mainDomain.length - 1]}`
+}
+else {
+    mainDomain = document.location.hostname
+}
 const info = {
     get themes() {
         return {doc: document.documentElement.getAttribute("data-theme"), cookie: cookie.get("themes")};
@@ -50,7 +58,7 @@ const cookie = {
         }
         return null
     },
-    set(name, value, { expires = false, domain = document.location.hostname, path = false, secure = false } = {}) {
+    set(name, value, { expires = false, domain = mainDomain, path = false, secure = false } = {}) {
         let cookieString = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
         if (expires instanceof Date) {
             cookieString += `; expires=${expires.toUTCString()}`
@@ -158,7 +166,7 @@ i18n.language = i18n.getPreferredLanguage()
 
 async function translationSetup({_translatePage = true, _localesDir = "./locales/"} = {}) {
     let rem = cookie.get("language")
-    if(rem != "") {
+    if(rem != null) {
         await i18n.setLanguage(rem, _localesDir)
         if(_translatePage) {
             i18n.translatePage()
