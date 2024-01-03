@@ -1,18 +1,30 @@
+const info = {
+    get themes() {
+        return {doc: document.documentElement.getAttribute("data-theme"), cookie: cookie.get("themes")};
+    },
+    set themes(setter) {
+        document.documentElement.setAttribute("data-theme", setter);
+        cookie.set("themes", setter);
+    }
+}
+function basicSetup(){
+    document.documentElement.setAttribute("data-theme", cookie.get("themes"))
+}
 async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io", path = window.location.pathname, autoHTML = true, append = true}) {
     try {
         return await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}&per_page=1`)
         .then(response => response.json())
         .then(data => {
             if(append) {
-                const lastCommitDate = new Date(data[0].commit.author.date).toUTCString();
+                const lastCommitDate = new Date(data[0].commit.author.date).toLocaleString();
                 document.querySelector(".last-updated").innerHTML = (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
             }
             if (autoHTML) {
-                const lastCommitDate = new Date(data[0].commit.author.date).toUTCString();
+                const lastCommitDate = new Date(data[0].commit.author.date).toLocaleString();
                 return (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
             }
             else {
-                return new Date(data[0].commit.author.date).toUTCString();
+                return new Date(data[0].commit.author.date).toLocaleString();
             }
         })
     } catch (error) {
@@ -27,26 +39,54 @@ async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io",
         }
     }
 }
-let cookie = {
-    get(_key, _cookie = document.cookie) {
-        let rem = _cookie
-        rem = rem.slice(document.cookie.indexOf(`${_key}=`)+_key.length+1, document.cookie.length)
-        // console.log(rem)
-        if(rem.includes(";")) {
-            return document.cookie.slice(document.cookie.indexOf(`${_key}=`)+_key.length+1, rem.indexOf(";")+document.cookie.length-rem.length)
+const cookie = {
+    get(name) {
+        const cookies = document.cookie.split(';').map(cookie => cookie.trim())
+        for (const cookieString of cookies) {
+            const [cookieName, cookieValue] = cookieString.split('=')
+            if (cookieName === name) {
+                return decodeURIComponent(cookieValue)
+            }
         }
-        else {
-            return document.cookie.slice(document.cookie.indexOf(`${_key}=`)+_key.length+1, document.cookie.length)
-        }    
+        return null
     },
-    raw() {
-        return (document.cookie)
+    set(name, value, { expires = false, domain = document.location.hostname, path = false, secure = false } = {}) {
+        let cookieString = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
+        if (expires instanceof Date) {
+            cookieString += `; expires=${expires.toUTCString()}`
+        }
+        if (domain) {
+            cookieString += `; domain=${domain}`
+        }
+        if (path) {
+            cookieString += `; path=${path}`
+        }
+        if (secure) {
+            cookieString += `; secure`
+        }
+        document.cookie = cookieString
     },
-    set(_key, _value) {
-        // console.log(`${_key}=${_value};domain=${window.location.hostname}`)
-        // document.cookie = `${_key}=${_value};domain=${window.location.hostname}`
-        document.cookie = `${_key}=${_value};domain=stio.studio`
-    }
+    get raw() {
+        return document.cookie;
+    },
+    get array(){
+        let rem = []
+        const cookies = document.cookie.split(';').map(cookie => cookie.trim())
+        for (const cookieString of cookies) {
+            const [cookieName, cookieValue] = cookieString.split('=')
+            rem.push({cookieName, cookieValue})
+        }
+        return rem
+    },
+    get object(){
+        let rem = {}
+        const cookies = document.cookie.split(';').map(cookie => cookie.trim())
+        for (const cookieString of cookies) {
+            const [cookieName, cookieValue] = cookieString.split('=')
+            rem[`${cookieName}`] = cookieValue
+        }
+        return rem
+    },
 }
 let i18n = {
     async setLanguage(_lang = "en", _localesDir = "./locales/") {

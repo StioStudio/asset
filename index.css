@@ -294,6 +294,9 @@ h1 {
 .height-15px {
     height: 15px;
 }
+.height-100per {
+    height: 100%;
+}
 .options {
     background-color: var(--orange-background-color);
     border: none;
