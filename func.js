@@ -11,6 +11,7 @@ const info = {
         return {doc: document.documentElement.getAttribute("data-theme"), cookie: cookie.get("themes")};
     },
     set themes(setter) {
+        // if(setter == null) setter = ""
         document.documentElement.setAttribute("data-theme", setter);
         cookie.set("themes", setter);
     },
@@ -20,17 +21,38 @@ const info = {
     set language (setter)  {
         let _setter;
         let _localesDir;
-        if (typeof setter == "string") {
-            _setter = setter
+        // if (setter == "" || setter == null) {
+        //     if (i18n.translated == 0) return
+        //     i18n.resetTranslations()
+        //     return
+        // }
+        if(!(setter == null || setter == "undefined")) {
+            if (typeof setter == "string") {
+                // if(setter == "null") {
+                //     _setter = null
+                // }
+                // else {
+                _setter = setter
+                // }
+                _localesDir = "./locales/"
+            }
+            else {
+                console.log(setter)
+                _setter = setter.language
+                _localesDir = setter.localesDir
+            }
+        }
+        if(setter == "null") {
+            _setter = ""
             _localesDir = "./locales/"
         }
-        else {
-            _setter = setter.language
-            _localesDir = setter.localesDir
-        }
-        if (_setter == "") {
+        // console.log(setter)
+        // console.log(this.language.docElm)
+        if (_setter == "" || _setter == " ") {
             if (i18n.translated == 0) return
             i18n.resetTranslations()
+            document.documentElement.setAttribute("lang", _setter)
+            cookie.set("language", _setter)
             return
         }
         document.documentElement.setAttribute("lang", _setter)
@@ -41,7 +63,8 @@ const info = {
     },
 }
 function basicSetup(){
-    document.documentElement.setAttribute("data-theme", cookie.get("themes"))
+    info.themes = info.themes.cookie
+    // document.documentElement.setAttribute("data-theme", cookie.get("themes"))
 }
 async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io", path = window.location.pathname, autoHTML = true, append = true}) {
     try {
@@ -74,7 +97,7 @@ async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io",
 }
 const cookie = {
     get(name) {
-        const cookies = document.cookie.split(';').map(cookie => cookie.trim())
+        const cookies = cookie.raw.split(';').map(cookie => cookie.trim())
         for (const cookieString of cookies) {
             const [cookieName, cookieValue] = cookieString.split('=')
             if (cookieName === name) {
@@ -84,6 +107,7 @@ const cookie = {
         return null
     },
     set(name, value, { expires = false, domain = mainDomain, path = false, secure = false } = {}) {
+        // console.log(name, value, expires, domain, path, secure)
         let cookieString = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
         if (expires instanceof Date) {
             cookieString += `; expires=${expires.toUTCString()}`
@@ -97,26 +121,43 @@ const cookie = {
         if (secure) {
             cookieString += `; secure`
         }
-        document.cookie = cookieString
+        cookie.raw = cookieString
+    },
+    delete(name, {domain = mainDomain, path = false, secure = false } = {}){
+        this.set(name, "", {expires: new Date("Thu, 01 Jan 1970 00:00:01 GMT"), path: path, domain: domain, secure: secure})
+    },
+    deleteAll({domain = mainDomain, path = false, secure = false } = {}){
+        this.array.forEach((name)=>{
+            console.log(name.cookieName)
+            this.delete(name.cookieName, {expires: new Date("Thu, 01 Jan 1970 00:00:01 GMT"), path: path, domain: domain, secure: secure})
+        })
     },
     get raw() {
         return document.cookie;
     },
+    set raw(setter) {
+        document.cookie = setter
+    },
     get array(){
         let rem = []
-        const cookies = document.cookie.split(';').map(cookie => cookie.trim())
+        const cookies = cookie.raw.split(';').map(cookie => cookie.trim())
         for (const cookieString of cookies) {
             const [cookieName, cookieValue] = cookieString.split('=')
-            rem.push({cookieName, cookieValue})
+            rem.push(
+                {
+                    cookieName: decodeURIComponent(cookieName),
+                    cookieValue: decodeURIComponent(cookieValue)
+                }
+            )
         }
         return rem
     },
     get object(){
         let rem = {}
-        const cookies = document.cookie.split(';').map(cookie => cookie.trim())
+        const cookies = cookie.raw.split(';').map(cookie => cookie.trim())
         for (const cookieString of cookies) {
             const [cookieName, cookieValue] = cookieString.split('=')
-            rem[`${cookieName}`] = cookieValue
+            rem[`${decodeURIComponent(cookieName)}`] = decodeURIComponent(cookieValue)
         }
         return rem
     },
@@ -124,7 +165,9 @@ const cookie = {
 let i18n = {
     async setLanguage(_lang = "en", _localesDir = "./locales/") {
         this.language = _lang;
+        // if(_lang != "" && _lang != null) {
         this.languageMsg = await (await fetch(`${_localesDir}${this.language}/messages.json`)).json()
+        // }
     },
     getMessage(_msg, _get = "message") {
         let rem = ""
@@ -139,8 +182,12 @@ let i18n = {
         return (document.documentElement.lang)
     },
     translated: 0,
-    translatePage(_doc) {
-        document.querySelectorAll("tra").forEach(e => {
+    translatePage(_doc = document) {
+        // if(this.language == "") {
+        //     this.resetTranslations(_doc)
+        //     return
+        // }
+        _doc.querySelectorAll("tra").forEach(e => {
             // console.log(e.cloneNode(true));
             e.style.display = "content";
             if(this.translated == 0) {
@@ -155,15 +202,14 @@ let i18n = {
         });
         this.translated++
     },
-    resetTranslations() {
-        if (this.translated == 0) {
-            console.error("Have not been translated yet")
-        }
-        document.querySelectorAll("tra").forEach(e => {
+    resetTranslations(_doc = document) {
+        if (this.translated == 0) return
+        _doc.querySelectorAll("tra").forEach(e => {
             // e.setAttributeNS("tra", "tra", `${e.innerHTML}`)
             // console.log(e)
             e.innerHTML = e.getAttribute("tra")
         });
+        // this.translated++
     },
     language: "en",
     languageMsg: {},
