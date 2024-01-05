@@ -188,3 +188,39 @@
     --accent: #23cbde;
     --accent-ops-50: #23cbde80;
 }
+[data-theme="lateSunsetDark"] {
+    --text: #FFFFFF;
+    --text-ops-50: #FFFFFF80;
+    --background: #1A1A1A;
+    --background-ops-50: #1A1A1A80;
+    --primary: #FF4500;
+    --primary-ops-50: #FF450080;
+    --secondary: #FFA64D;
+    --secondary-ops-50: #FFA64D80;
+    --accent: #383838;
+    --accent-ops-50: #38383880;
+}
+[data-theme="lateSunsetLight"] {
+    --text: #000000;
+    --text-ops-50: #00000080;
+    --background: #e6e6e6;
+    --background-ops-50: #e6e6e680;
+    --primary: #ff5c1f;
+    --primary-ops-50: #ff5c1f80;
+    --secondary: #def480;
+    --secondary-ops-50: #def48080;
+    --accent: #c7c7c7;
+    --accent-ops-50: #c7c7c780;
+}
+[data-theme="testTheme"] {
+    --text: #000000;
+    --text-ops-50: #00000080;
+    --background: #e6e6e6;
+    --background-ops-50: #e6e6e680;
+    --primary: #ff5c1f;
+    --primary-ops-50: #ff5c1f80;
+    --secondary: #def480;
+    --secondary-ops-50: #def48080;
+    --accent: #c7c7c7;
+    --accent-ops-50: #c7c7c780;
+}
