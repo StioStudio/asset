@@ -48,16 +48,16 @@
 }
 @media (prefers-color-scheme: light) {
     [data-theme="default"] {
-        --text: #122400;
-        --text-ops-50: #12240080;
-        --background: #eddbff;
-        --background-ops-50: #eddbff80;
-        --primary: #e69100;
-        --primary-ops-50: #e6910080;
-        --secondary: #004ab3;
-        --secondary-ops-50: #004ab380;
-        --accent: #6eb427;
-        --accent-ops-50: #6eb42780;
+        --text: #222222;
+        --text-ops-50: #22222280;
+        --background: #F5F5F5;
+        --background-ops-50: #F5F5F580;
+        --primary: #FFA500;
+        --primary-ops-50: #FFA50080;
+        --secondary: #0066cc;
+        --secondary-ops-50: #0066cc80;
+        --accent: #4CAF50;
+        --accent-ops-50: #4CAF5080;
     }
 }
 @media screen and (max-width: 940px) {
@@ -88,16 +88,16 @@
     --accent-ops-50: #91d84b80;
 }
 [data-theme="light"] {
-    --text: #122400;
-    --text-ops-50: #12240080;
-    --background: #eddbff;
-    --background-ops-50: #eddbff80;
-    --primary: #e69100;
-    --primary-ops-50: #e6910080;
-    --secondary: #004ab3;
-    --secondary-ops-50: #004ab380;
-    --accent: #6eb427;
-    --accent-ops-50: #6eb42780;
+    --text: #222222;
+    --text-ops-50: #22222280;
+    --background: #F5F5F5;
+    --background-ops-50: #F5F5F580;
+    --primary: #FFA500;
+    --primary-ops-50: #FFA50080;
+    --secondary: #0066cc;
+    --secondary-ops-50: #0066cc80;
+    --accent: #4CAF50;
+    --accent-ops-50: #4CAF5080;
 }
 [data-theme="RealTimeColorsLight"] {
     --text: #0f0f0f;
@@ -267,15 +267,27 @@
     --accent: #2123ed;
     --accent-ops-50: #2123ed80;
 }
+[data-theme="oldLight"] {
+    --text: #122400;
+    --text-ops-50: #12240080;
+    --background: #eddbff;
+    --background-ops-50: #eddbff80;
+    --primary: #e69100;
+    --primary-ops-50: #e6910080;
+    --secondary: #004ab3;
+    --secondary-ops-50: #004ab380;
+    --accent: #6eb427;
+    --accent-ops-50: #6eb42780;
+}
 [data-theme="testTheme"] {
-    --text: #FFFFFF;
-    --text-ops-50: #FFFFFF80;
-    --background: #1A1A1A;
-    --background-ops-50: #1A1A1A80;
-    --primary: #00BFFF;
-    --primary-ops-50: #00BFFF80;
-    --secondary: #FF1493;
-    --secondary-ops-50: #FF149380;
+    --text: #222222;
+    --text-ops-50: #22222280;
+    --background: #F5F5F5;
+    --background-ops-50: #F5F5F580;
+    --primary: #FFA500;
+    --primary-ops-50: #FFA50080;
+    --secondary: #0066cc;
+    --secondary-ops-50: #0066cc80;
     --accent: #4CAF50;
     --accent-ops-50: #4CAF5080;
 }
