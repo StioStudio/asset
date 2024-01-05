@@ -13,7 +13,32 @@ const info = {
     set themes(setter) {
         document.documentElement.setAttribute("data-theme", setter);
         cookie.set("themes", setter);
-    }
+    },
+    get language()  {
+        return {doc: document.documentElement.getAttribute("lang"), cookie: cookie.get("language")}
+    },
+    set language (setter)  {
+        let _setter;
+        let _localesDir;
+        if (typeof setter == "string") {
+            _setter = setter
+            _localesDir = "./locales/"
+        }
+        else {
+            _setter = setter.language
+            _localesDir = setter.localesDir
+        }
+        if (_setter == "") {
+            if (i18n.translated == 0) return
+            i18n.resetTranslations()
+            return
+        }
+        document.documentElement.setAttribute("lang", _setter)
+        cookie.set("language", _setter)
+        i18n.setLanguage(_setter, _localesDir).then(()=>{
+            i18n.translatePage()
+        })
+    },
 }
 function basicSetup(){
     document.documentElement.setAttribute("data-theme", cookie.get("themes"))
