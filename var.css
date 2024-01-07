@@ -279,19 +279,42 @@
     --accent: #6eb427;
     --accent-ops-50: #6eb42780;
 }
-[data-theme="testTheme"] {
-    --text: #222222;
-    --text-ops-50: #22222280;
-    --background: #F5F5F5;
-    --background-ops-50: #F5F5F580;
-    --primary: #FFA500;
-    --primary-ops-50: #FFA50080;
-    --secondary: #0066cc;
-    --secondary-ops-50: #0066cc80;
-    --accent: #4CAF50;
-    --accent-ops-50: #4CAF5080;
+[data-theme="hackerDark"] {
+    --text: #f4f0ea;
+    --text-ops-50: #f4f0ea80;
+    --background: #120f09;
+    --background-ops-50: #120f0980;
+    --primary: #00FF00;
+    --primary-ops-50: #00FF0080;
+    --secondary: #00cc00;
+    --secondary-ops-50: #00cc0080;
+    --accent: #2cff2c;
+    --accent-ops-50: #2cff2c80;
 }
-
+[data-theme="hackerLight"] {
+    --text: #14100b;
+    --text-ops-50: #14100b80;
+    --background: #f6f4ee;
+    --background-ops-50: #f6f4ee80;
+    --primary: #00ff00;
+    --primary-ops-50: #00ff0080;
+    --secondary: #33ff33;
+    --secondary-ops-50: #33ff3380;
+    --accent: #00d100;
+    --accent-ops-50: #00d10080;
+}
+[data-theme="testTheme"] {
+    --text: #14100b;
+    --text-ops-50: #14100b80;
+    --background: #f6f4ee;
+    --background-ops-50: #f6f4ee80;
+    --primary: #00ff00;
+    --primary-ops-50: #00ff0080;
+    --secondary: #33ff33;
+    --secondary-ops-50: #33ff3380;
+    --accent: #00d100;
+    --accent-ops-50: #00d10080;
+}
 
 [data-theme="save-1"] {
     --text: #FFFFFF;
