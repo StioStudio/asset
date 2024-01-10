@@ -7,6 +7,9 @@ else {
     mainDomain = document.location.hostname
 }
 const info = {
+    get ipAddress(){
+        return (async ()=>{return await(await(await fetch("https://api64.ipify.org/?format=json")).json()).ip})()
+    },
     get themes() {
         return {doc: document.documentElement.getAttribute("data-theme"), cookie: cookie.get("themes")};
     },
@@ -416,4 +419,28 @@ function addInArray(_array, _element, _InsertPosition) {
 
 function Notification() {
 
+}
+
+function toHTML(html, trim = true) {
+    // Process the HTML string.
+    html = trim ? html : html.trim();
+    if (!html) return null;
+    
+    // Then set up a new template element.
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    const result = template.content.children;
+  
+    // Then return either an HTMLElement or HTMLCollection,
+    // based on whether the input HTML had one or more roots.
+    if (result.length === 1) return result[0];
+    return result;
+}
+
+String.prototype.remove = function(...e){
+    let rem;
+    e.forEach((a)=>{
+        rem = this.valueOf().split(a).join("-")
+    })
+    return (rem)
 }
