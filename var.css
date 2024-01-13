@@ -306,12 +306,12 @@
 [data-theme="testTheme"] {
     --text: #14100b;
     --text-ops-50: #14100b80;
-    --background: #f6f4ee;
-    --background-ops-50: #f6f4ee80;
-    --primary: #00ff00;
-    --primary-ops-50: #00ff0080;
-    --secondary: #33ff33;
-    --secondary-ops-50: #33ff3380;
+    --background: linear-gradient(to right,#ff0000, #ffa500, #ffff00, #008000, #0000ff, #800080);
+    --background-ops-50: linear-gradient(to right,#ff000080, #ffa50080, #ffff0080, #00800080, #0000ff80, #80008080);
+    --primary: linear-gradient(to top,#ff0000, #ffa500, #ffff00, #008000, #0000ff, #800080);
+    --primary-ops-50: linear-gradient(to top,#ff000080, #ffa50080, #ffff0080, #00800080, #0000ff80, #80008080);
+    --secondary: linear-gradient(to bottom,#ff0000, #ffa500, #ffff00, #008000, #0000ff, #800080);
+    --secondary-ops-50: linear-gradient(to bottom,#ff0000, #ffa500, #ffff00, #008000, #0000ff, #800080);
     --accent: #00d100;
     --accent-ops-50: #00d10080;
 }
