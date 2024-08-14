@@ -7,21 +7,39 @@ else {
     mainDomain = document.location.hostname
 }
 const info = {
-    get ipAddress(){
-        return (async ()=>{return await(await(await fetch("https://api64.ipify.org/?format=json")).json()).ip})()
+    get ipAddress() {
+        return new Promise(async (resolve, reject) => {
+            let ip = ""
+            try {
+                ip = await (await fetch("https://server.stio.studio/ip")).text()
+            } catch {
+                ip = await (await (await fetch("https://api64.ipify.org/?format=json")).json()).ip
+            }
+            resolve(ip)
+        })
+
     },
     get themes() {
-        return {doc: document.documentElement.getAttribute("data-theme"), cookie: cookie.get("themes")};
+        return { doc: document.documentElement.getAttribute("data-theme"), cookie: cookie.get("themes") };
     },
     set themes(setter) {
         // if(setter == null) setter = ""
         document.documentElement.setAttribute("data-theme", setter);
         cookie.set("themes", setter);
     },
-    get language()  {
-        return {doc: document.documentElement.getAttribute("lang"), cookie: cookie.get("language")}
+    get language() {
+        return { doc: document.documentElement.getAttribute("lang"), cookie: cookie.get("language") }
     },
-    set language (setter)  {
+    set autoUpdateLanguage(setter) {
+        console.log("hi", this.autoUpdateLanguage)
+
+        function update() {
+
+        }
+
+        return { doc: document.documentElement.getAttribute("lang"), cookie: cookie.get("language") }
+    },
+    set language(setter) {
         let _setter;
         let _localesDir;
         // if (setter == "" || setter == null) {
@@ -29,7 +47,7 @@ const info = {
         //     i18n.resetTranslations()
         //     return
         // }
-        if(!(setter == null || setter == "undefined")) {
+        if (!(setter == null || setter == "undefined")) {
             if (typeof setter == "string") {
                 // if(setter == "null") {
                 //     _setter = null
@@ -45,7 +63,7 @@ const info = {
                 _localesDir = setter.localesDir
             }
         }
-        if(setter == "null") {
+        if (setter == "null") {
             _setter = ""
             _localesDir = "./locales/"
         }
@@ -60,34 +78,34 @@ const info = {
         }
         document.documentElement.setAttribute("lang", _setter)
         cookie.set("language", _setter)
-        i18n.setLanguage(_setter, _localesDir).then(()=>{
+        i18n.setLanguage(_setter, _localesDir).then(() => {
             i18n.translatePage()
         })
     },
 }
-function basicSetup(){
+function basicSetup() {
     info.themes = info.themes.cookie
     // document.documentElement.setAttribute("data-theme", cookie.get("themes"))
 }
-async function lastUpdated({owner = "StioStudio", repo = "StioStudio.github.io", path = window.location.pathname, autoHTML = true, append = true}) {
+async function lastUpdated({ owner = "StioStudio", repo = "StioStudio.github.io", path = window.location.pathname, autoHTML = true, append = true }) {
     try {
         return await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}&per_page=1`)
-        .then(response => response.json())
-        .then(data => {
-            if(append) {
-                const lastCommitDate = new Date(data[0].commit.author.date).toLocaleString();
-                document.querySelector(".last-updated").innerHTML = (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
-            }
-            if (autoHTML) {
-                const lastCommitDate = new Date(data[0].commit.author.date).toLocaleString();
-                return (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
-            }
-            else {
-                return new Date(data[0].commit.author.date).toLocaleString();
-            }
-        })
+            .then(response => response.json())
+            .then(data => {
+                if (append) {
+                    const lastCommitDate = new Date(data[0].commit.author.date).toLocaleString();
+                    document.querySelector(".last-updated").innerHTML = (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
+                }
+                if (autoHTML) {
+                    const lastCommitDate = new Date(data[0].commit.author.date).toLocaleString();
+                    return (`<tra>Last Updated: </tra><time datetime="${lastCommitDate}">${lastCommitDate}</time>`);
+                }
+                else {
+                    return new Date(data[0].commit.author.date).toLocaleString();
+                }
+            })
     } catch (error) {
-        if(append) {
+        if (append) {
             document.querySelector(".last-updated").innerHTML = (`<tra>Last Updated: </tra><time datetime="ERROR getting date">ERROR getting date</time>`);
         }
         if (autoHTML) {
@@ -126,13 +144,13 @@ const cookie = {
         }
         cookie.raw = cookieString
     },
-    delete(name, {domain = mainDomain, path = false, secure = false } = {}){
-        this.set(name, "", {expires: new Date("Thu, 01 Jan 1970 00:00:01 GMT"), path: path, domain: domain, secure: secure})
+    delete(name, { domain = mainDomain, path = false, secure = false } = {}) {
+        this.set(name, "", { expires: new Date("Thu, 01 Jan 1970 00:00:01 GMT"), path: path, domain: domain, secure: secure })
     },
-    deleteAll({domain = mainDomain, path = false, secure = false } = {}){
-        this.array.forEach((name)=>{
+    deleteAll({ domain = mainDomain, path = false, secure = false } = {}) {
+        this.array.forEach((name) => {
             console.log(name.cookieName)
-            this.delete(name.cookieName, {expires: new Date("Thu, 01 Jan 1970 00:00:01 GMT"), path: path, domain: domain, secure: secure})
+            this.delete(name.cookieName, { expires: new Date("Thu, 01 Jan 1970 00:00:01 GMT"), path: path, domain: domain, secure: secure })
         })
     },
     get raw() {
@@ -141,7 +159,7 @@ const cookie = {
     set raw(setter) {
         document.cookie = setter
     },
-    get array(){
+    get array() {
         let rem = []
         const cookies = cookie.raw.split(';').map(cookie => cookie.trim())
         for (const cookieString of cookies) {
@@ -155,7 +173,7 @@ const cookie = {
         }
         return rem
     },
-    get object(){
+    get object() {
         let rem = {}
         const cookies = cookie.raw.split(';').map(cookie => cookie.trim())
         for (const cookieString of cookies) {
@@ -193,7 +211,9 @@ let i18n = {
         _doc.querySelectorAll("tra").forEach(e => {
             // console.log(e.cloneNode(true));
             e.style.display = "content";
-            if(this.translated == 0) {
+            console.log(e.cloneNode(true))
+            console.log(e.getAttribute("tra") == null)
+            if (e.getAttribute("tra") == null) {
                 e.setAttributeNS("tra", "tra", `${e.innerHTML}`)
                 // console.log(e)
                 e.innerHTML = this.getMessage(e.innerHTML)
@@ -224,12 +244,12 @@ let i18n = {
         });
         return rem
     },
-    createMessagesJSON({_oldJSON = {}, _document = document} = {}) {
+    createMessagesJSON({ _oldJSON = {}, _document = document } = {}) {
         let tra = this.getTra(_document)
         let rem = _oldJSON
         tra.forEach(e => {
-            if(rem[e] == undefined) {
-                rem[e] = {message: e}
+            if (rem[e] == undefined) {
+                rem[e] = { message: e }
                 console.log(rem[e])
             }
         });
@@ -238,11 +258,11 @@ let i18n = {
 }
 i18n.language = i18n.getPreferredLanguage()
 
-async function translationSetup({_translatePage = true, _localesDir = "./locales/"} = {}) {
+async function translationSetup({ _translatePage = true, _localesDir = "./locales/" } = {}) {
     let rem = cookie.get("language")
-    if(rem != null) {
+    if (rem != null) {
         await i18n.setLanguage(rem, _localesDir)
-        if(_translatePage) {
+        if (_translatePage) {
             i18n.translatePage()
         }
     }
@@ -289,37 +309,37 @@ function addProjectBox(_type, _projectHeader, _id, _class, _projects) {
 }
 function createProject(_type, _projects) {
     let fontSize = 17
-    if (_projects._projectHeader.length > 14+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "A") {
+    if (_projects._projectHeader.length > 14 + (11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "A") {
         fontSize = 15
     }
-    if (_projects._projectHeader.length > 20+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "A") {
+    if (_projects._projectHeader.length > 20 + (11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "A") {
         fontSize = 9
     }
     if (_projects._projectType == "C") {
         fontSize = 50
     }
-    if (_projects._projectHeader.length > 5+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 5 + (11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 35
     }
-    if (_projects._projectHeader.length > 7+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 7 + (11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 30
     }
-    if (_projects._projectHeader.length > 10+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 10 + (11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 20
     }
-    if (_projects._projectHeader.length > 15+(11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
+    if (_projects._projectHeader.length > 15 + (11 * _projects._projectHeader.includes("<tra>")) && _projects._projectType == "C") {
         fontSize = 15
     }
     let rem;
-    if(_type == "A") {
+    if (_type == "A") {
         let remB = ""
-        if(_projects._projectContentImageLink != undefined) {
+        if (_projects._projectContentImageLink != undefined) {
             remB = `<img src="${_projects._projectContentImageLink}" alt="${_projects._projectContentImageLinkAlt}">`
         }
         rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
     <div class="project overflow-hidden">
         <div class="project-header centerText overflow-overlay" style="font-size: ${fontSize
-        }px">
+            }px">
             ${_projects._projectHeader}
         </div>
         <div class="project-content display-flex">
@@ -328,15 +348,15 @@ function createProject(_type, _projects) {
     </div>
 </a>`
     }
-    if(_type == "B") {
+    if (_type == "B") {
         let remB = ""
-        if(_projects._projectContentImageLink != undefined) {
+        if (_projects._projectContentImageLink != undefined) {
             remB = `<img src="${_projects._projectContentImageLink}" alt="${_projects._projectContentImageLinkAlt}">`
         }
         rem = `<a class="projectType-${_projects._projectType} text-decoration-none" href="${_projects._link}">
     <div class="project overflow-hidden">
         <div class="project-header centerText overflow-overlay" style="font-size: ${fontSize
-        }px">
+            }px">
             ${_projects._projectHeader}
         </div>
         <div class="project-content display-flex">
@@ -353,13 +373,13 @@ function create_projectBox(_type, _projectHeader, _projects, _id, _class = "") {
     projectCountId++
 
     let projectHeader = ""
-    if(_projectHeader != undefined) {
+    if (_projectHeader != undefined) {
         projectHeader = `<div class="bigBox-header centerText">
         <h3 class="noMargin">${_projectHeader}</h3>
         <a class="anchorjs-link" href="#${_id}"></a>
     </div>`
     }
-    if(_type == "A") {
+    if (_type == "A") {
         let rem = `<div id="${_id}" class="type-${_type} bigBox projectBox box-shadow overflow-hidden ${_class}">
         ${projectHeader}
         <div class="bigBox-content display-flex width100per">
@@ -391,9 +411,9 @@ function create_projectBox(_type, _projectHeader, _projects, _id, _class = "") {
         // console.log(rem)
         return rem
     }
-    if(_type == "B") {
+    if (_type == "B") {
         let projectHeader = ""
-        if(_projectHeader != undefined) {
+        if (_projectHeader != undefined) {
             projectHeader = `<div class="bigBox-header centerText">
             <h3 class="noMargin">${_projectHeader}</h3>
             <a class="anchorjs-link" href="#${_id}"></a>
@@ -425,21 +445,21 @@ function toHTML(html, trim = true) {
     // Process the HTML string.
     html = trim ? html : html.trim();
     if (!html) return null;
-    
+
     // Then set up a new template element.
     const template = document.createElement('template');
     template.innerHTML = html;
     const result = template.content.children;
-  
+
     // Then return either an HTMLElement or HTMLCollection,
     // based on whether the input HTML had one or more roots.
     if (result.length === 1) return result[0];
     return result;
 }
 
-String.prototype.remove = function(...e){
+String.prototype.remove = function (...e) {
     let rem;
-    e.forEach((a)=>{
+    e.forEach((a) => {
         rem = this.valueOf().split(a).join("-")
     })
     return (rem)
