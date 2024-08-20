@@ -9,8 +9,6 @@
     --secondary-ops-50: #34A85380;
     --accent: #FBBC05;
     --accent-ops-50: #FBBC0580;
-
-
     /* --test: #ff0000;
 
     --main-background-color: #070F12;
@@ -28,9 +26,12 @@
     --red: #e257;
     --main-border-radius: 10px;
     --main-transition: 0.7s;
-    --main-box-shadow: drop-shadow(10px 10px 7px  var(--text-ops-50));
-    --main-box-shadow-hover: drop-shadow(12px 12px 10px var(--text));
-    --font: "Recursive", cursive;
+    --main-box-shadow: drop-shadow(10px 10px 7px  var(
+    --text-ops-50));
+    --main-box-shadow-hover: drop-shadow(12px 12px 10px var(
+    --text));
+    --font:
+    "Audiowide", "Recursive", cursive;
 }
 @media (prefers-color-scheme: dark) {
     [data-theme="default"] {
@@ -303,18 +304,6 @@
     --accent: #00d100;
     --accent-ops-50: #00d10080;
 }
-[data-theme="nikee.dev (original)"] {
-    --text: #282828;
-    --text-ops-50: #28282880;
-    --background: #282828;
-    --background-ops-50: #28282880;
-    --primary: #6271f7;
-    --primary-ops-50: #6271f780;
-    --secondary: #FFA64D;
-    --secondary-ops-50: #FFA64D80;
-    --accent: #383838;
-    --accent-ops-50: #38383880;
-}
 [data-theme="testTheme"] {
     --text: #14100b;
     --text-ops-50: #14100b80;
@@ -327,7 +316,6 @@
     --accent: #00d100;
     --accent-ops-50: #00d10080;
 }
-
 
 [data-theme="save-1"] {
     --text: #FFFFFF;
